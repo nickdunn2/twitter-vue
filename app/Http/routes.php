@@ -14,3 +14,26 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::resource('users', 'UsersController', [
+        'except' => ['create', 'edit', 'store']
+    ]);
+
+    Route::resource('tweets', 'TweetsController', [
+        'except' => ['create', 'edit']
+    ]);
+
+    Route::group(['middleware' => 'auth'], function() {
+        Route::resource('tweets', 'TweetsController', [
+            'only' => ['store', 'update', 'destroy']
+        ]);
+    });
+
+});
+
