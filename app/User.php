@@ -23,4 +23,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the tweets created by this user.
+     */
+    public function tweets() {
+        return $this->hasMany('App\Tweet');
+    }
+
+    /**
+     * Get the tweets the user has liked.
+     */
+    public function likes() {
+        return $this->belongsToMany('App\Tweet')->withTimestamps();
+    }
 }
