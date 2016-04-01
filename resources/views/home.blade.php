@@ -9,6 +9,7 @@
     <ul class="list-group">
         <li class="list-group-item" v-for="tweet in list">
             @{{ tweet.tweet_content }}
+            <strong @click="deleteTweet(tweet)">X</strong>
         </li>
     </ul>
 </template>

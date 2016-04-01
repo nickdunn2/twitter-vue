@@ -10,9 +10,19 @@ Vue.component('tweets', {
     },
 
     created: function() {
-        $.getJSON('api/tweets', function(tweets) {
-            this.list = tweets;
-        }.bind(this));
+        this.fetchTweetList();
+    },
+
+    methods: {
+        fetchTweetList: function() {
+            $.getJSON('api/tweets', function(tweets) {
+                this.list = tweets;
+            }.bind(this));
+        },
+
+        deleteTweet: function(tweet) {
+            this.list.$remove(tweet);
+        }
     }
 });
 
