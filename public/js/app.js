@@ -15,7 +15,7 @@ Vue.component('tweets', {
 
     methods: {
         fetchTweetList: function() {
-            $.getJSON('api/tweets', function(tweets) {
+            this.$http.get('api/tweets', function(tweets) {
                 this.list = tweets;
             }.bind(this));
         },
