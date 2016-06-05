@@ -15,7 +15,7 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        return Tweet::latest()->get();
+        return Tweet::with('user')->latest()->get();
     }
 
     /**
