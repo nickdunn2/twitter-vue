@@ -43,24 +43,23 @@ Vue.component('tweets', {
                 confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "No, cancel!",
                 closeOnConfirm: false,
-                closeOnCancel: false
-            }, function(isConfirm) {
-                if (isConfirm) {
-                    this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
-                        this.list.$remove(tweet);
-                        swal("Deleted!", "Your tweet has been deleted.", "success");
-                    });   
-                } else {
-                    swal("Cancelled", "Your tweet is safe :)", "error");
-                }
-            });
-            this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
-                this.list.$remove(tweet);
-                swal("Deleted!", "Your tweet has been deleted.", "success");
-            }).error(function(error) {
-                console.log(error);
-                alert(error);
-            });
+                closeOnCancel: true 
+            }, function() {
+                this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
+                    this.list.$remove(tweet);
+                    swal("Deleted!", "Your tweet has been deleted.", "success");
+                }).error(function(error) {
+                    console.log(error);
+                    alert(error);
+                });
+            }.bind(this));
+            // this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
+            //     this.list.$remove(tweet);
+            //     swal("Deleted!", "Your tweet has been deleted.", "success");
+            // }).error(function(error) {
+            //     console.log(error);
+            //     alert(error);
+            // });
 
             // var deletedTweetId = tweet.id;
             // this.list.$remove(tweet);
