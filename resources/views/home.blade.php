@@ -11,7 +11,7 @@
         <li class="list-group-item" v-for="tweet in list">
             <strong>@{{ tweet.user.name }}</strong><br/>
             @{{ tweet.tweet_content }}
-            <i class="fa fa-trash" aria-hidden="true" @click="deleteTweet(tweet)"></i>
+            <i v-show="{{ Auth::user()->id }} == tweet.user_id" class="fa fa-trash" aria-hidden="true" @click="deleteTweet(tweet)"></i>
         </li>
     </ul>
 </template>

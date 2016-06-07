@@ -39,6 +39,7 @@ Vue.component('tweets', {
                 text: "You will not be able to recover this tweet!",
                 type: "warning",
                 showCancelButton: true,
+                allowOutsideClick: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "No, cancel!",
@@ -47,23 +48,18 @@ Vue.component('tweets', {
             }, function() {
                 this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
                     this.list.$remove(tweet);
-                    swal("Deleted!", "Your tweet has been deleted.", "success");
+                    swal({
+                        title: "Deleted!",
+                        text: "Your tweet has been deleted.",
+                        type: "success",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }).error(function(error) {
                     console.log(error);
                     alert(error);
                 });
             }.bind(this));
-            // this.$http.delete('api/tweets/'+tweet.id).then(function(response) {
-            //     this.list.$remove(tweet);
-            //     swal("Deleted!", "Your tweet has been deleted.", "success");
-            // }).error(function(error) {
-            //     console.log(error);
-            //     alert(error);
-            // });
-
-            // var deletedTweetId = tweet.id;
-            // this.list.$remove(tweet);
-            // this.$http.delete('api/tweets/'+deletedTweetId);
         }
     }
 });
