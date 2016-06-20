@@ -13,9 +13,11 @@
 	
     <ul class="list-group">
         <li class="list-group-item" v-for="tweet in list">
-            <strong>@{{ tweet.user.name }}</strong><br/>
-            @{{ tweet.tweet_content }}
-            <i v-show="{{ Auth::user()->id }} == tweet.user_id" class="fa fa-trash" aria-hidden="true" @click="deleteTweet(tweet)"></i>
+            <h5>@{{ tweet.user.name }}</h5>
+            <p>@{{ tweet.tweet_content }} <i v-show="{{ Auth::user()->id }} == tweet.user_id" class="fa fa-trash" aria-hidden="true" @click="deleteTweet(tweet)"></i></p>
+            <p>
+                <i class="fa fa-heart" aria-hidden="true"></i> @{{ tweet.likes.length }}
+            </p>
         </li>
     </ul>
 </template>

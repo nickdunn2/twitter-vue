@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-    <!-- {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}} -->
+    <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
 
     <style>
         body {
@@ -82,7 +82,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <script type="text/javascript" src="{{ 'js/app.js' }}"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="{{ elixir('js/app.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ 'js/app.js' }}"></script> -->
 </body>
 </html>
