@@ -83,6 +83,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script type="text/javascript" src="{{ 'js/app.js' }}"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <!-- {{-- <script src="{{ elixir('js/app.js') }}"></script> --}} -->
 </body>
 </html>
