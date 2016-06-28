@@ -15,7 +15,7 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        return Tweet::latest()->get();
+        return Tweet::with('user', 'likes')->latest()->get();
     }
 
     /**
@@ -59,13 +59,6 @@ class TweetsController extends Controller
         $tweet->tweet_content = $request->tweet_content;
         $tweet->save();
         return $tweet;
-
-        $post = Post::findOrFail($id);
-        $this->authorize('update-destroy', $post);
-        $post->user_id = auth()->user()->id;
-        $post->post_content = $request->post_content;
-        $post->save();
-        return $post;
     }
 
     /**
@@ -79,6 +72,34 @@ class TweetsController extends Controller
         $tweet = Tweet::findOrFail($id);
         $this->authorize('update-destroy', $tweet);
         $tweet->delete();
+        return $tweet;
+    }
+
+    /**
+     * Allow the current user to like a tweet.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function like($id)
+    {
+        $tweet = Tweet::findOrFail($id);
+        $tweet->likes()->attach(auth()->user()->id);
+        return $tweet;
+    }
+
+    /**
+     * Allow the current user to unlike a tweet.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike($id)
+    {
+        $tweet = Tweet::findOrFail($id);
+        $tweet->likes()->detach(auth()->user()->id);
         return $tweet;
     }
 }

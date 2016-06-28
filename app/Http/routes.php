@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'api'], function () {
 
+    Route::post('tweets/likes/{tweet_id}', 'TweetsController@like');
+    Route::delete('tweets/likes/{tweet_id}', 'TweetsController@unlike');
+
     Route::resource('users', 'UsersController', [
         'except' => ['create', 'edit', 'store']
     ]);
