@@ -71,24 +71,6 @@ Vue.component('tweet', {
   }
 });
 
-// Vue.component('tweets', {
-
-//     methods: {
-
-//         likeTweet: function(tweet) {
-//             this.$http.post('api/tweets/likes/'+tweet.id);
-//             this.liked = true;
-//         },
-
-//         unlikeTweet: function(tweet) {
-//             this.$http.delete('api/tweets/likes/'+tweet.id);
-//             this.liked = false;
-//         },
-
-
-//    }
-// });
-
 Vue.component('add-tweet', {
   template: '#add-tweet-template',
 
