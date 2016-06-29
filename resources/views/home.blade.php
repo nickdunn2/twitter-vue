@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="main" class="container">
+
+<app></app>
+
+<script src="{{ asset('js/main.js') }}"></script>
+
+<!-- <div id="main" class="container">
     <div class="container fluid">
         <div class="input-group">
             <add-tweet></add-tweet>
@@ -26,5 +31,5 @@
         </p>
         <p><i class="fa fa-heart" aria-hidden="true" @click="toggleLike(tweet)"></i> @{{ likes }}</p>
     </li>
-</template>
+</template> -->
 @endsection
