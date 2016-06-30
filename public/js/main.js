@@ -12502,32 +12502,28 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vue = require('vue');
-
-var _vue2 = _interopRequireDefault(_vue);
-
 var _actions = require('../vuex/actions');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_vue2.default.use(require('vue-resource'));
 exports.default = {
   vuex: {
-    actions: { addTweet: _actions.addTweet },
-    getters: {
-      // need to access state here
-      // something like...
-      // data: state => state.data
-      // which is the ES6 syntax for...
-      // data: function(state) {
-      // return state.data;
-      // }
+    actions: { getAllTweets: _actions.getAllTweets, addTweet: _actions.addTweet }
+  },
+
+  methods: {
+    tryAddTweet: function tryAddTweet(e) {
+      var tweet_content = e.target.value;
+      if (tweet_content.trim()) {
+        this.addTweet(tweet_content);
+        e.target.value = '';
+        this.getAllTweets();
+      }
     }
   }
 
+  // maybe also a ready() hook here?
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"input-group\">\n  <input type=\"text\" class=\"form-control\" placeholder=\"What's happening?\" @keyup.enter=\"addTweet\">\n  <button type=\"button\" class=\"btn btn-primary\" @click=\"addTweet\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Tweet</button>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"input-group\">\n  <input type=\"text\" class=\"form-control\" placeholder=\"What's happening?\" @keyup.enter=\"tryAddTweet\">\n  <!-- <button type=\"submit\" class=\"btn btn-primary\" @click=\"addTweet\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Tweet</button> -->\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -12538,7 +12534,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-351d8b09", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/actions":11,"vue":4,"vue-hot-reload-api":2,"vue-resource":3}],7:[function(require,module,exports){
+},{"../vuex/actions":11,"vue":4,"vue-hot-reload-api":2}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12678,6 +12674,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _vue2.default.use(require('vue-resource'));
 
+_vue2.default.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+
 var getAllTweets = exports.getAllTweets = function getAllTweets(_ref) {
   var dispatch = _ref.dispatch;
 
@@ -12686,10 +12684,10 @@ var getAllTweets = exports.getAllTweets = function getAllTweets(_ref) {
   });
 };
 
-var addTweet = exports.addTweet = function addTweet(_ref2) {
+var addTweet = exports.addTweet = function addTweet(_ref2, tweet_content) {
   var dispatch = _ref2.dispatch;
 
-  dispatch('ADD_TWEET');
+  _vue2.default.http.post('api/tweets', { tweet_content: tweet_content });
 };
 
 },{"vue":4,"vue-resource":3}],12:[function(require,module,exports){
@@ -12718,10 +12716,6 @@ exports.default = new _vuex2.default.Store({
   },
 
   mutations: {
-    ADD_TWEET: function ADD_TWEET(state) {
-      console.log('adding tweet');
-    },
-
     RECEIVE_ALL_TWEETS: function RECEIVE_ALL_TWEETS(state, tweets) {
       state.tweets = tweets;
     }

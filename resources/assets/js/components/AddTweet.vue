@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
-    <input type="text" class="form-control" placeholder="What's happening?" @keyup.enter="addTweet"/>
-    <button type="button" class="btn btn-primary" @click="addTweet"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tweet</button>
+    <input type="text" class="form-control" placeholder="What's happening?" @keyup.enter="tryAddTweet"/>
+    <!-- <button type="submit" class="btn btn-primary" @click="addTweet"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tweet</button> -->
   </div>
 </template>
 
@@ -10,24 +10,25 @@
  -->
 
 <script>
-  import Vue from 'vue';
-  Vue.use(require('vue-resource'));
-  import { addTweet } from '../vuex/actions';
+  import { getAllTweets, addTweet } from '../vuex/actions';
 
   export default {
     vuex: {
-      actions: { addTweet },
-      getters: {
-        // need to access state here
-        // something like...
-        // data: state => state.data
-        // which is the ES6 syntax for...
-        // data: function(state) {
-          // return state.data;
-        // }
-      }
+      actions: { getAllTweets, addTweet }      
     },
 
+    methods: {
+      tryAddTweet (e) {
+        const tweet_content = e.target.value
+        if (tweet_content.trim()) {
+          this.addTweet(tweet_content)
+          e.target.value = ''
+          this.getAllTweets();
+        }
+      }
+    }
+
+    
     // maybe also a ready() hook here?
   }
 </script>

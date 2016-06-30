@@ -10,10 +10,6 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    ADD_TWEET: (state) => {
-      console.log('adding tweet');
-    },
-
     RECEIVE_ALL_TWEETS: (state, tweets) => {
       state.tweets = tweets;
     }
