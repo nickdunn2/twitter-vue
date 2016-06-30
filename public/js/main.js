@@ -12506,7 +12506,7 @@ var _actions = require('../vuex/actions');
 
 exports.default = {
   vuex: {
-    actions: { getAllTweets: _actions.getAllTweets, addTweet: _actions.addTweet }
+    actions: { addTweet: _actions.addTweet }
   },
 
   methods: {
@@ -12515,7 +12515,6 @@ exports.default = {
       if (tweet_content.trim()) {
         this.addTweet(tweet_content);
         e.target.value = '';
-        this.getAllTweets();
       }
     }
   }
@@ -12687,7 +12686,16 @@ var getAllTweets = exports.getAllTweets = function getAllTweets(_ref) {
 var addTweet = exports.addTweet = function addTweet(_ref2, tweet_content) {
   var dispatch = _ref2.dispatch;
 
-  _vue2.default.http.post('api/tweets', { tweet_content: tweet_content });
+  _vue2.default.http.post('api/tweets', { tweet_content: tweet_content }).then(function (response) {
+    // console.log(response.data);
+    var newTweet = response.data;
+    dispatch('ADD_TWEET', newTweet);
+  });
+
+  // Vue.http.post('api/tweets', { tweet_content }).then(function(response) {
+  //   const newTweet = response.data;
+  //   dispatch('ADD_TWEET', newTweet);
+  // });
 };
 
 },{"vue":4,"vue-resource":3}],12:[function(require,module,exports){
@@ -12716,6 +12724,11 @@ exports.default = new _vuex2.default.Store({
   },
 
   mutations: {
+    ADD_TWEET: function ADD_TWEET(state, newTweet) {
+      state.tweets.unshift(newTweet);
+      console.log('pushed it!');
+    },
+
     RECEIVE_ALL_TWEETS: function RECEIVE_ALL_TWEETS(state, tweets) {
       state.tweets = tweets;
     }

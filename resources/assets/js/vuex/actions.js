@@ -10,6 +10,9 @@ export const getAllTweets = ({ dispatch }) => {
 };
 
 export const addTweet = ({ dispatch }, tweet_content) => { 
-  Vue.http.post('api/tweets', { tweet_content });
+  Vue.http.post('api/tweets', { tweet_content }).then(function(response) {
+    const newTweet = response.data;
+    dispatch('ADD_TWEET', newTweet);
+  });
 };
 

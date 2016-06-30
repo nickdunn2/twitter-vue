@@ -10,11 +10,11 @@
  -->
 
 <script>
-  import { getAllTweets, addTweet } from '../vuex/actions';
+  import { addTweet } from '../vuex/actions';
 
   export default {
     vuex: {
-      actions: { getAllTweets, addTweet }      
+      actions: { addTweet }      
     },
 
     methods: {
@@ -23,7 +23,6 @@
         if (tweet_content.trim()) {
           this.addTweet(tweet_content)
           e.target.value = ''
-          this.getAllTweets();
         }
       }
     }

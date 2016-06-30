@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tweet;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TweetsController extends Controller
 {
@@ -30,7 +31,7 @@ class TweetsController extends Controller
         $tweet->user_id = auth()->user()->id;
         $tweet->tweet_content = $request->tweet_content;
         $tweet->save();
-        return $tweet;
+        return $tweet->with('user', 'likes')->latest()->first();
     }
 
     /**
