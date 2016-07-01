@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
     <input type="text" class="form-control" placeholder="What's happening?" @keyup.enter="tryAddTweet"/>
-    <!-- <button type="submit" class="btn btn-primary" @click="addTweet"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tweet</button> -->
+    <!-- <button type="button" class="btn btn-primary" @click="tryAddTweet"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tweet</button> -->
   </div>
 </template>
 

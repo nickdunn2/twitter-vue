@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import store from './vuex/store';
 import App from './components/App.vue';
-import { getAllTweets } from './vuex/actions'
+import { getAllTweets, getCurrentUser } from './vuex/actions'
 
 new Vue({
   store,
@@ -12,3 +12,4 @@ new Vue({
 });
 
 getAllTweets(store);
+getCurrentUser(store);

@@ -63,4 +63,16 @@ class UsersController extends Controller
         $user->delete();
         return $user;
     }
+
+    /**
+     * Get the currently authenticated user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getCurrentUser(Request $request)
+    {
+        // This route uses 'auth' middleware to redirect to /login if there is no current user.
+        return $request->user();
+    }
 }
