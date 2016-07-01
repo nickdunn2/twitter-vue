@@ -14137,12 +14137,13 @@ exports.default = {
     },
 
     actions: {
-      deleteTweet: _actions.deleteTweet
+      deleteTweet: _actions.deleteTweet,
+      likeTweet: _actions.likeTweet
     }
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<li class=\"list-group-item\">\n  <h5><strong>{{ tweet.user.name }}</strong></h5>\n  <p>\n      {{ tweet.tweet_content }}\n      <i v-show=\"currentUser.id == tweet.user_id\" class=\"fa fa-trash\" aria-hidden=\"true\" @click=\"deleteTweet(tweet)\"></i>\n  </p>\n  <!-- <p><i class=\"fa fa-heart\" aria-hidden=\"true\" @click=\"toggleLike(tweet)\"></i> @{{ likes }}</p> -->\n</li>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<li class=\"list-group-item\">\n  <h5><strong>{{ tweet.user.name }}</strong></h5>\n  <p>\n      {{ tweet.tweet_content }} \n      <i v-show=\"currentUser.id == tweet.user_id\" class=\"fa fa-trash\" aria-hidden=\"true\" @click=\"deleteTweet(tweet)\"></i>\n  </p>\n  <p><i class=\"fa fa-heart\" aria-hidden=\"true\" @click=\"likeTweet(tweet)\"></i> {{ tweet.likes.length }}</p>\n</li>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14224,7 +14225,7 @@ new _vue2.default({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteTweet = exports.addTweet = exports.getAllTweets = exports.getCurrentUser = undefined;
+exports.likeTweet = exports.deleteTweet = exports.addTweet = exports.getAllTweets = exports.getCurrentUser = undefined;
 
 var _vue = require('vue');
 
@@ -14291,6 +14292,14 @@ var deleteTweet = exports.deleteTweet = function deleteTweet(_ref4, tweet) {
       alert(error);
     });
   });
+};
+
+var likeTweet = exports.likeTweet = function likeTweet(_ref5, tweet) {
+  var dispatch = _ref5.dispatch;
+
+  console.log('entering likeTweet action');
+  _vue2.default.http.post('api/tweets/likes/' + tweet.id);
+  console.log('done with likeTweet action');
 };
 
 },{"vue":5,"vue-resource":4}],13:[function(require,module,exports){

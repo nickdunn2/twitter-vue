@@ -21,8 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'api'], function () {
 
-    Route::post('tweets/likes/{tweet_id}', 'TweetsController@like');
-    Route::delete('tweets/likes/{tweet_id}', 'TweetsController@unlike');
+    Route::post('tweets/likes/{tweet_id}', 'TweetsController@toggleLike');
+    // The delete route is obsolete after changing it to 'toggleLike' instead of 'like' or 'unlike'
+    // Route::delete('tweets/likes/{tweet_id}', 'TweetsController@unlike');
     Route::get('users/currentuser', [
         'middleware' => 'auth',
         'uses' => 'UsersController@getCurrentUser'

@@ -37,4 +37,14 @@ class User extends Authenticatable
     public function likes() {
         return $this->belongsToMany('App\Tweet')->withTimestamps();
     }
+
+    /**
+     * Check to see if a user has already liked a tweet.
+     */
+    public function hasLiked($id) {
+        return ! $this->likes->filter(function($like) use ($id)
+        {
+            return $like->id == $id;
+        })->isEmpty();
+    }
 }

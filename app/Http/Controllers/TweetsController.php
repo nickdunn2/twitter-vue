@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\User;
 use App\Tweet;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -77,21 +79,34 @@ class TweetsController extends Controller
     }
 
     /**
-     * Allow the current user to like a tweet.
+     * Allow the current user to like or unlike a tweet.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function like($id)
+    public function toggleLike($id)
     {
         $tweet = Tweet::findOrFail($id);
-        $tweet->likes()->attach(auth()->user()->id);
-        return $tweet;
+        $user = auth()->user();
+
+        // First check to see if the current user has already liked the tweet.
+        if($user->hasLiked($tweet->id)) {
+            // If they have, remove that entry from the tweet_user table.
+            $tweet->likes()->detach($user->id);
+        } else {
+            // If they haven't, add a new entry.
+            $tweet->likes()->attach($user->id);
+        }
+
+        // return $tweet->with('likes') results in an error. 
+        // return $tweet->with('likes')->get() results in all tweets being returned.
+        // And just doing return $tweet doesn't include the likes.
+        return Tweet::where('id', '=', $tweet->id)->with('likes')->get();
     }
 
     /**
-     * Allow the current user to unlike a tweet.
+     * Allow the current user to unlike a tweet. THIS CAN PROBABLY LATER BE REMOVED.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

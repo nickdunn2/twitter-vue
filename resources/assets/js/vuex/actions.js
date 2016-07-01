@@ -51,3 +51,9 @@ export const deleteTweet = ({ dispatch }, tweet) => {
     });
   });
 };
+
+export const likeTweet = ({ dispatch }, tweet) => {
+  console.log('entering likeTweet action');
+  Vue.http.post('api/tweets/likes/'+tweet.id);
+  console.log('done with likeTweet action');
+}
