@@ -5733,4 +5733,10 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.tweet-text {
+  color: #4B9EAC; }
+
+.liked {
+  color: #DFA546; }
+
 /*# sourceMappingURL=app.css.map */

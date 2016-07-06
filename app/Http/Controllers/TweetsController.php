@@ -104,18 +104,4 @@ class TweetsController extends Controller
         // And just doing return $tweet doesn't include the likes.
         return Tweet::where('id', '=', $tweet->id)->with('likes')->get();
     }
-
-    /**
-     * Allow the current user to unlike a tweet. THIS CAN PROBABLY LATER BE REMOVED.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function unlike($id)
-    {
-        $tweet = Tweet::findOrFail($id);
-        $tweet->likes()->detach(auth()->user()->id);
-        return $tweet;
-    }
 }

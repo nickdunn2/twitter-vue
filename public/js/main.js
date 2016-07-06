@@ -14138,12 +14138,28 @@ exports.default = {
 
     actions: {
       deleteTweet: _actions.deleteTweet,
-      likeTweet: _actions.likeTweet
+      toggleLike: _actions.toggleLike
+    }
+  },
+  computed: {
+    likeCount: function likeCount() {
+      return this.tweet.likes.length;
+    },
+
+    currentUserHasLiked: function currentUserHasLiked() {
+      var currentUserId = this.currentUser.id;
+      var likesArray = this.tweet.likes;
+      for (var i = 0; i < likesArray.length; i++) {
+        if (likesArray[i].id == currentUserId) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<li class=\"list-group-item\">\n  <h5><strong>{{ tweet.user.name }}</strong></h5>\n  <p>\n      {{ tweet.tweet_content }} \n      <i v-show=\"currentUser.id == tweet.user_id\" class=\"fa fa-trash\" aria-hidden=\"true\" @click=\"deleteTweet(tweet)\"></i>\n  </p>\n  <p><i class=\"fa fa-heart\" aria-hidden=\"true\" @click=\"likeTweet(tweet)\"></i> {{ tweet.likes.length }}</p>\n</li>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<li class=\"list-group-item\">\n  <h5 class=\"tweet-text\"><strong>{{ tweet.user.name }}</strong></h5>\n  <p>\n      {{ tweet.tweet_content }} \n      <i v-show=\"currentUser.id == tweet.user_id\" class=\"fa fa-trash\" aria-hidden=\"true\" @click=\"deleteTweet(tweet)\"></i>\n  </p>\n  <p :class=\"{ liked: currentUserHasLiked }\">\n    <i v-show=\"currentUserHasLiked\" class=\"fa fa-heart\" aria-hidden=\"true\" @click=\"toggleLike(tweet)\">\n    </i>\n    <i v-show=\"!currentUserHasLiked\" class=\"fa fa-heart-o\" aria-hidden=\"true\" @click=\"toggleLike(tweet)\">\n    </i>\n     {{ likeCount }}\n  </p>\n</li>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14225,7 +14241,7 @@ new _vue2.default({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.likeTweet = exports.deleteTweet = exports.addTweet = exports.getAllTweets = exports.getCurrentUser = undefined;
+exports.toggleLike = exports.deleteTweet = exports.addTweet = exports.getAllTweets = exports.getCurrentUser = undefined;
 
 var _vue = require('vue');
 
@@ -14294,12 +14310,16 @@ var deleteTweet = exports.deleteTweet = function deleteTweet(_ref4, tweet) {
   });
 };
 
-var likeTweet = exports.likeTweet = function likeTweet(_ref5, tweet) {
+var toggleLike = exports.toggleLike = function toggleLike(_ref5, tweet) {
   var dispatch = _ref5.dispatch;
 
-  console.log('entering likeTweet action');
-  _vue2.default.http.post('api/tweets/likes/' + tweet.id);
-  console.log('done with likeTweet action');
+  _vue2.default.http.post('api/tweets/likes/' + tweet.id).then(function (response) {
+    var tweet = response.data[0];
+    dispatch('TOGGLE_LIKE', tweet);
+  }).catch(function (error) {
+    console.log(error);
+    alert(error);
+  });
 };
 
 },{"vue":5,"vue-resource":4}],13:[function(require,module,exports){
@@ -14350,6 +14370,11 @@ exports.default = new _vuex2.default.Store({
       // from Tweet.vue. But since we're instead working with the object returned from the DELETE request
       // in actions.js, we need to use the underscore method to find the object with that id and delete it.
       state.tweets = _underscore2.default.without(state.tweets, _underscore2.default.findWhere(state.tweets, { id: deletedTweet.id }));
+    },
+
+    TOGGLE_LIKE: function TOGGLE_LIKE(state, tweet) {
+      var neededTweet = _underscore2.default.findWhere(state.tweets, { id: tweet.id });
+      neededTweet.likes = tweet.likes;
     }
 
     // DECREMENT: ({ counters }, counterId) => {

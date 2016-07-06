@@ -52,8 +52,12 @@ export const deleteTweet = ({ dispatch }, tweet) => {
   });
 };
 
-export const likeTweet = ({ dispatch }, tweet) => {
-  console.log('entering likeTweet action');
-  Vue.http.post('api/tweets/likes/'+tweet.id);
-  console.log('done with likeTweet action');
+export const toggleLike = ({ dispatch }, tweet) => {
+  Vue.http.post('api/tweets/likes/'+tweet.id).then(function(response) {
+    const tweet = response.data[0];
+    dispatch('TOGGLE_LIKE', tweet);
+  }).catch(function(error) {
+    console.log(error);
+    alert(error);
+  });
 }
