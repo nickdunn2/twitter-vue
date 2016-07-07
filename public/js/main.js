@@ -14052,48 +14052,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _actions = require('../vuex/actions');
-
-exports.default = {
-  vuex: {
-    actions: { addTweet: _actions.addTweet }
-  },
-
-  methods: {
-    tryAddTweet: function tryAddTweet(e) {
-      var tweet_content = e.target.value;
-      if (tweet_content.trim()) {
-        this.addTweet(tweet_content);
-        e.target.value = '';
-      }
-    }
-  }
-
-  // maybe also a ready() hook here?
-};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"input-group\">\n  <input type=\"text\" class=\"form-control\" placeholder=\"What's happening?\" @keyup.enter=\"tryAddTweet\">\n  <!-- <button type=\"button\" class=\"btn btn-primary\" @click=\"tryAddTweet\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Tweet</button> -->\n</div>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  if (!module.hot.data) {
-    hotAPI.createRecord("_v-351d8b09", module.exports)
-  } else {
-    hotAPI.update("_v-351d8b09", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
-  }
-})()}
-},{"../vuex/actions":12,"vue":5,"vue-hot-reload-api":3}],8:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _AddTweet = require('./AddTweet.vue');
-
-var _AddTweet2 = _interopRequireDefault(_AddTweet);
-
 var _TweetList = require('./TweetList.vue');
 
 var _TweetList2 = _interopRequireDefault(_TweetList);
@@ -14102,12 +14060,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   components: {
-    AddTweet: _AddTweet2.default,
     TweetList: _TweetList2.default
   }
 };
+
+// import AddTweet from './AddTweet.vue';
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"app\" class=\"container\">\n  <div class=\"container fluid\">\n    <add-tweet></add-tweet>\n    <tweet-list></tweet-list>\n  </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"app\" class=\"container\">\n  <div class=\"container fluid\">\n    <tweet-list></tweet-list>\n  </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14118,7 +14077,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-cb288510", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./AddTweet.vue":7,"./TweetList.vue":10,"vue":5,"vue-hot-reload-api":3}],9:[function(require,module,exports){
+},{"./TweetList.vue":9,"vue":5,"vue-hot-reload-api":3}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14170,7 +14129,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-c32ee3f0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/actions":12,"vue":5,"vue-hot-reload-api":3}],10:[function(require,module,exports){
+},{"../vuex/actions":11,"vue":5,"vue-hot-reload-api":3}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14181,20 +14140,33 @@ var _Tweet = require('./Tweet.vue');
 
 var _Tweet2 = _interopRequireDefault(_Tweet);
 
+var _actions = require('../vuex/actions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
   components: { Tweet: _Tweet2.default },
   vuex: {
+    actions: { addTweet: _actions.addTweet },
     getters: {
       tweets: function tweets(state) {
         return state.tweets;
       }
     }
+  },
+
+  methods: {
+    tryAddTweet: function tryAddTweet(e) {
+      var tweet_content = e.target.value;
+      if (tweet_content.trim()) {
+        this.addTweet(tweet_content);
+        e.target.value = '';
+      }
+    }
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<ul class=\"list-group\">\n  <tweet v-for=\"tweet in tweets\" track-by=\"id\" :tweet=\"tweet\"></tweet>\n</ul>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"input-group\">\n  <input type=\"text\" class=\"form-control\" placeholder=\"What's happening?\" @keyup.enter=\"tryAddTweet\">\n  <!-- <button type=\"button\" class=\"btn btn-primary\" @click=\"tryAddTweet\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> Tweet</button> -->\n  <!-- add v-show=\"newTweet\" later to the button, and v-model=\"newTweet\" to the input\n    although there is something tricky you have to do in Vuex with form inputs (no v-model)\n  -->\n</div>\n<ul class=\"list-group\">\n  <tweet v-for=\"tweet in tweets\" track-by=\"id\" :tweet=\"tweet\"></tweet>\n</ul>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14205,7 +14177,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-7614ebc6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"./Tweet.vue":9,"vue":5,"vue-hot-reload-api":3}],11:[function(require,module,exports){
+},{"../vuex/actions":11,"./Tweet.vue":8,"vue":5,"vue-hot-reload-api":3}],10:[function(require,module,exports){
 'use strict';
 
 var _vue = require('vue');
@@ -14235,7 +14207,7 @@ new _vue2.default({
 (0, _actions.getAllTweets)(_store2.default);
 (0, _actions.getCurrentUser)(_store2.default);
 
-},{"./components/App.vue":8,"./vuex/actions":12,"./vuex/store":13,"vue":5}],12:[function(require,module,exports){
+},{"./components/App.vue":7,"./vuex/actions":11,"./vuex/store":12,"vue":5}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14322,7 +14294,7 @@ var toggleLike = exports.toggleLike = function toggleLike(_ref5, tweet) {
   });
 };
 
-},{"vue":5,"vue-resource":4}],13:[function(require,module,exports){
+},{"vue":5,"vue-resource":4}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14386,6 +14358,6 @@ exports.default = new _vuex2.default.Store({
   }
 });
 
-},{"underscore":2,"vue":5,"vuex":6}]},{},[11]);
+},{"underscore":2,"vue":5,"vuex":6}]},{},[10]);
 
 //# sourceMappingURL=main.js.map
