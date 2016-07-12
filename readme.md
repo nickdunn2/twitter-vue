@@ -1,27 +1,11 @@
-# Laravel PHP Framework
+# Twitter-like app using Laravel and Vuex
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This is just an attempt to learn VueJS and Vuex by making a Twitter-like application. It has a (very basic) back-end using Laravel. Next steps will be to implement vue-router for individual tweets or individual user pages, the ability to "follow" or "subscribe to" other users, etc.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Other resources
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Some helpful Vue/Vuex resources found along the way. (Will keep adding to this list.)
 
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+* [Vue, Redux, Vuex talk](https://www.youtube.com/watch?v=l1KHL-TX3qs) by James Browne from London Vue.js Meetup 
+* [Learn Vuex by Building a Notes App](https://coligo.io/learn-vuex-by-building-notes-app/) (Coligo)
+* [Real-time Grid Component](https://www.youtube.com/watch?v=Jxefsv5Zqkw) using Laravel, Vue, Vuex and Socket.io by Ryan Dobbs
