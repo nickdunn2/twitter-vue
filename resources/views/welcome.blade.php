@@ -1,17 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
-                <div class="panel-body">
-                    Your Application's Landing Page.
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="jumbotron header-jumbotron">
+  <div class="container header-text">
+    <h1 class="header-name">Twitter-Vue</h1>
+    <p class="header-description">A simple, Twitter-like app using VueJS, Vuex and Laravel</p>
+    <ul id="login-signup-list">
+        <li><a class="btn btn-primary login-signup-button" href="{{ url('/register') }}" role="button">Sign Up</a></li>
+        <li><a class="btn btn-primary login-signup-button" href="{{ url('/login') }}" role="button">Log In</a></li>
+    </ul>
+  </div> <!-- close container -->
+</div> <!-- close jumbotron -->
 @endsection

@@ -5733,10 +5733,64 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+body {
+  height: 100%;
+  padding-top: 50px;
+  font-family: 'Lato', sans-serif; }
+
+.navbar {
+  color: #4B9EAC; }
+
 .tweet-text {
   color: #4B9EAC; }
 
 .liked {
   color: #DFA546; }
+
+.login-signup-form {
+  padding: 20px 0; }
+
+.header-jumbotron {
+  background: url("../images/blue-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 400px; }
+
+.header-text {
+  text-align: center;
+  color: #ffffff !important; }
+
+.header-name {
+  font-weight: bold;
+  font-size: 400%;
+  font-size: 7vw; }
+
+.header-description {
+  font-size: 200%;
+  font-size: 3.5vw; }
+
+#login-signup-list {
+  list-style-type: none;
+  padding: 0; }
+
+#login-signup-list li {
+  display: inline-block;
+  margin: 5px; }
+
+.login-signup-button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: 1 px solid #ffffff;
+  cursor: pointer;
+  text-transform: uppercase;
+  overflow: hidden;
+  outline: none; }
+
+.login-signup-button:hover {
+  background-color: #3A84C5; }
+
+footer {
+  background-color: #cccccc;
+  margin-top: -30px;
+  padding: 20px 0px 10px; }
 
 /*# sourceMappingURL=app.css.map */
